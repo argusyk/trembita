@@ -1,0 +1,13 @@
+[project]
+name = "trembita"
+version = "1.0.0"
+description = "Супровідний код посібника «Секрети Gemini AI»: асистент «Трембіта» логістичної компанії «Смерека»"
+requires-python = ">=3.11"
+dependencies = ["google-genai>=2.30", "pydantic>=2", "numpy>=1.26"]
+
+[project.optional-dependencies]
+agents = ["google-adk>=2.10", "a2a-sdk"]
+test = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

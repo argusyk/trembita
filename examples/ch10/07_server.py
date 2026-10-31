@@ -1,4 +1,4 @@
-# Розділ 10. Виклик функцій – приклад 7 (рукопис: 10-funktsii.md, рядок 304)
+# Розділ 10. Виклик функцій – приклад 7 (рукопис: 10-funktsii.md, рядок 314)
 # smereka_mcp/server.py – MCP-сервер системи відстеження «Смереки»
 from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations

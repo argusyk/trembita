@@ -1,4 +1,4 @@
-# Розділ 12. Заземлення та вбудовані інструменти – приклад 4 (рукопис: 12-zazemlennia.md, рядок 149)
+# Розділ 12. Заземлення та вбудовані інструменти – приклад 4 (рукопис: 12-zazemlennia.md, рядок 161)
 from google import genai
 from google.genai import types
 
@@ -14,7 +14,8 @@ resp = client.models.generate_content(
                types.Tool(google_search=types.GoogleSearch())],  # пошук – для довідки
     ),
 )
-for m in resp.candidates[0].url_context_metadata.url_metadata or []:
+ucm = resp.candidates[0].url_context_metadata   # None, якщо жодної сторінки не читали
+for m in (ucm.url_metadata or []) if ucm else []:
     ok = m.url_retrieval_status == types.UrlRetrievalStatus.URL_RETRIEVAL_STATUS_SUCCESS
     print(m.retrieved_url, "прочитано" if ok else f"НЕ прочитано: {m.url_retrieval_status}")
 print(resp.text)

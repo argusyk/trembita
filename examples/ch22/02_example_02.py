@@ -1,13 +1,18 @@
 # Розділ 22. Комп'ютерне використання та браузерні агенти – приклад 2 (рукопис: 22-computer-use.md, рядок 93)
-from google import genai
 from google.genai import types
+from trembita.client import make_client
+from trembita.config import MODEL_MAIN
 
-client = genai.Client()
-MODEL_CU = "gemini-3.8-flash"     # звірте з документацією, які моделі мають computer_use
+client = make_client()
+MODEL_CU = MODEL_MAIN     # gemini-3.8-flash; звірте з документацією, які моделі мають computer_use
+
+# Дії, яких не вміє наш виконавець (підрозділ 22.4); назви обох поколінь – за кодом ADK 2.13
+UNSUPPORTED = ["drag_and_drop", "search", "go_forward", "open_web_browser", "triple_click",
+               "middle_click", "mouse_down", "mouse_up", "key_down", "key_up"]
 
 cu_tool = types.Tool(computer_use=types.ComputerUse(
     environment=types.Environment.ENVIRONMENT_BROWSER,
-    excluded_predefined_functions=["drag_and_drop"],   # звужуємо простір дій
+    excluded_predefined_functions=UNSUPPORTED,          # звужуємо простір дій
 ))
 config = types.GenerateContentConfig(
     tools=[cu_tool],

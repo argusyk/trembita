@@ -1,4 +1,4 @@
-# Розділ 12. Заземлення та вбудовані інструменти – приклад 5 (рукопис: 12-zazemlennia.md, рядок 193)
+# Розділ 12. Заземлення та вбудовані інструменти – приклад 5 (рукопис: 12-zazemlennia.md, рядок 206)
 from google import genai
 from google.genai import types
 

@@ -1,4 +1,4 @@
-# Розділ 17. Агентна розробка: Antigravity, Jules і Gemini Code Assist – приклад 2 (рукопис: 17-ahentna-rozrobka.md, рядок 224)
+# Розділ 17. Агентна розробка: Antigravity, Jules і Gemini Code Assist – приклад 2 (рукопис: 17-ahentna-rozrobka.md, рядок 230)
 # Навчальний приклад: агент Antigravity виконує задачу у віддаленому середовищі
 import time
 

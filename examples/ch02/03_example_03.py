@@ -5,7 +5,7 @@ from google.genai import types
 client = genai.Client()
 response = client.models.generate_content(
     model="gemini-3.8-flash",
-    contents="Продовж фразу одним словом: Вантаж SM-2610-0042 прибув до",
+    contents="Продовж фразу одним словом: Вантаж SM-2609-0315 прибув до",
     config=types.GenerateContentConfig(
         temperature=1.0,         # для Gemini 3+ рекомендовано лишати 1.0
         top_p=0.95,              # ядерний відбір

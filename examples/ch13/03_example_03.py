@@ -1,5 +1,6 @@
-# Розділ 13. Оптимізація: кешування контексту, пакетна обробка й вартість – приклад 3 (рукопис: 13-optymizatsiya.md, рядок 144)
+# Розділ 13. Оптимізація: кешування контексту, пакетна обробка й вартість – приклад 3 (рукопис: 13-optymizatsiya.md, рядок 158)
 import datetime as dt
+from zoneinfo import ZoneInfo
 from google import genai
 from google.genai import types
 from trembita.config import MODEL_MAIN
@@ -25,10 +26,11 @@ resp = client.models.generate_content(
 )
 print(resp.text, "| з кешу:", resp.usage_metadata.cached_content_token_count)
 
-# Подовжити ще на дві години або до кінця зміни (19:00 за Києвом = 17:00 UTC взимку)
+# Подовжити ще на дві години або до кінця зміни: 19:00 за Києвом (взимку це 17:00 UTC, влітку 16:00)
 client.caches.update(name=cache.name, config=types.UpdateCachedContentConfig(ttl="7200s"))
-end = dt.datetime(2026, 11, 2, 17, 0, tzinfo=dt.timezone.utc)
-client.caches.update(name=cache.name, config=types.UpdateCachedContentConfig(expire_time=end))
+end = dt.datetime(2026, 11, 2, 19, 0, tzinfo=ZoneInfo("Europe/Kyiv"))
+client.caches.update(name=cache.name,
+                     config=types.UpdateCachedContentConfig(expire_time=end.astimezone(dt.timezone.utc)))
 
 for c in client.caches.list():              # забуті кеші – гроші, що витікають щогодини
     print(c.display_name, c.model, c.expire_time)

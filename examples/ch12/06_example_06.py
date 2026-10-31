@@ -1,4 +1,4 @@
-# Розділ 12. Заземлення та вбудовані інструменти – приклад 6 (рукопис: 12-zazemlennia.md, рядок 233)
+# Розділ 12. Заземлення та вбудовані інструменти – приклад 6 (рукопис: 12-zazemlennia.md, рядок 246)
 import time
 from google import genai
 from google.genai import types
@@ -27,7 +27,8 @@ resp = client.models.generate_content(
         file_search=types.FileSearch(file_search_store_names=[store.name], top_k=5))]),
 )
 print(resp.text)
-for ch in resp.candidates[0].grounding_metadata.grounding_chunks or []:
+meta = resp.candidates[0].grounding_metadata
+for ch in (meta.grounding_chunks or []) if meta else []:
     rc = ch.retrieved_context
     if rc:
         print(rc.title, "стор.", rc.page_number)

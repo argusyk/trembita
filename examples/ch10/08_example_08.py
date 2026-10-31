@@ -1,4 +1,4 @@
-# Розділ 10. Виклик функцій – приклад 8 (рукопис: 10-funktsii.md, рядок 331)
+# Розділ 10. Виклик функцій – приклад 8 (рукопис: 10-funktsii.md, рядок 341)
 import asyncio
 from google import genai
 from google.genai import types

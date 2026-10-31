@@ -1,4 +1,4 @@
-# Розділ 18. Gemini для знаннєвої роботи: Workspace, NotebookLM, Deep Research і Gemini Enterprise – приклад 3 (рукопис: 18-znannieva-robota.md, рядок 272)
+# Розділ 18. Gemini для знаннєвої роботи: Workspace, NotebookLM, Deep Research і Gemini Enterprise – приклад 3 (рукопис: 18-znannieva-robota.md, рядок 274)
 # Нормалізація прайс-листів перевізників у єдину таблицю для Sheets
 import csv
 import pathlib
@@ -15,9 +15,11 @@ class TariffRow(BaseModel):
     carrier: str = Field(description="Назва перевізника")
     origin: str = Field(description="Місто відправлення")
     destination: str = Field(description="Місто або країна призначення")
-    weight_from_kg: float
-    weight_to_kg: float
-    price_eur: float = Field(description="Ставка без ПДВ, євро")
+    weight_from_kg: float | None = Field(None, description="Нижня межа ваги, якщо вказана")
+    weight_to_kg: float | None = Field(None, description="Верхня межа ваги, якщо вказана")
+    price: float | None = Field(None, description="Ставка без ПДВ, як у документі")
+    currency: str | None = Field(None, description="Валюта ставки, як у документі: EUR, PLN, UAH")
+    unit: str | None = Field(None, description="За що ставка: кг, палета, рейс, 100 кг")
     fuel_surcharge_pct: float | None = Field(None, description="Паливна надбавка, %")
     source_page: int = Field(description="Сторінка PDF, де знайдено ставку")
 

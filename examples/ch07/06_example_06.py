@@ -1,4 +1,4 @@
-# Розділ 7. Gemini API і Google Gen AI SDK – приклад 6 (рукопис: 07-api.md, рядок 268)
+# Розділ 7. Gemini API і Google Gen AI SDK – приклад 6 (рукопис: 07-api.md, рядок 271)
 import asyncio
 from google import genai
 

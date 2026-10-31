@@ -1,4 +1,4 @@
-# Розділ 6. Родина моделей Gemini і відкриті моделі Gemma – приклад 5 (рукопис: 06-rodyna-modeley.md, рядок 273)
+# Розділ 6. Родина моделей Gemini і відкриті моделі Gemma – приклад 5 (рукопис: 06-rodyna-modeley.md, рядок 287)
 from google import genai
 
 client = genai.Client()

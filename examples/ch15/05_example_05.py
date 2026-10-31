@@ -1,19 +1,24 @@
-# Розділ 15. Агенти на Gemini: Agent Development Kit і протокол A2A – приклад 5 (рукопис: 15-ahenty-adk.md, рядок 289)
+# Розділ 15. Агенти на Gemini: Agent Development Kit і протокол A2A – приклад 5 (рукопис: 15-ahenty-adk.md, рядок 312)
 from typing import Any, Optional
 
 from google.adk.agents import Agent, RunConfig
 from google.adk.tools import BaseTool, FunctionTool, ToolContext
 
 from trembita.config import MODEL_MAIN
+from trembita.pickup_guard import MAX_PICKUP_KG     # 24 000 кг – одна межа для всієї книги
 from trembita.tools import create_pickup, track_shipment
-
-MAX_PICKUP_KG = 20_000
 
 
 def guard_pickup(tool: BaseTool, args: dict[str, Any], tool_context: ToolContext) -> Optional[dict]:
     """before_tool: жорстке правило, що не залежить від моделі."""
-    if tool.name == "create_pickup" and float(args.get("weight_kg", 0)) > MAX_PICKUP_KG:
-        return {"status": "rejected", "reason": "понад 20 т – лише через диспетчера"}
+    if tool.name != "create_pickup":
+        return None
+    try:
+        weight = float(args.get("weight_kg", 0))
+    except (TypeError, ValueError):
+        return {"status": "rejected", "reason": "вага має бути числом"}
+    if weight > MAX_PICKUP_KG:
+        return {"status": "rejected", "reason": f"понад {MAX_PICKUP_KG} кг – лише через диспетчера"}
     return None                                    # None -> інструмент виконується
 
 

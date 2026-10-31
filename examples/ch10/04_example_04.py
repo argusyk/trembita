@@ -1,4 +1,4 @@
-# Розділ 10. Виклик функцій – приклад 4 (рукопис: 10-funktsii.md, рядок 178)
+# Розділ 10. Виклик функцій – приклад 4 (рукопис: 10-funktsii.md, рядок 188)
 from google import genai
 from google.genai import types
 from trembita.config import MODEL_MAIN

@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 38 (рукопис: 93-dodatok-g.md, рядок 759)
+# Додаток Г. Довідник рецептів коду – приклад 38 (рукопис: 93-dodatok-g.md, рядок 775)
 BLOCKED = {types.FinishReason.SAFETY, types.FinishReason.PROHIBITED_CONTENT,
            types.FinishReason.BLOCKLIST, types.FinishReason.SPII}
 

@@ -6,6 +6,7 @@ resp = client.models.generate_content(
     config=types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(thinking_level="high", include_thoughts=True)),
 )
-for part in resp.candidates[0].content.parts:
+content = resp.candidates[0].content if resp.candidates else None
+for part in (content.parts or []) if content else []:
     if part.text:                            # частина може містити лише підпис
         print("[думки]" if part.thought else "[відповідь]", part.text)

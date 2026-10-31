@@ -1,4 +1,4 @@
-# Розділ 18. Gemini для знаннєвої роботи: Workspace, NotebookLM, Deep Research і Gemini Enterprise – приклад 1 (рукопис: 18-znannieva-robota.md, рядок 112)
+# Розділ 18. Gemini для знаннєвої роботи: Workspace, NotebookLM, Deep Research і Gemini Enterprise – приклад 1 (рукопис: 18-znannieva-robota.md, рядок 114)
 # Огляд ринку перевезень до ЄС агентом Deep Research у фоновому режимі
 import time
 

@@ -68,7 +68,6 @@
 - `ch09/03_example_03.py`
 - `ch09/04_example_04.py`
 - `ch09/05_example_05.py`
-- `ch09/06_example_06.py`
 
 ## Розділ 10. Виклик функцій
 
@@ -79,6 +78,7 @@
 - `ch10/06_example_06.py`
 - `ch10/07_server.py`
 - `ch10/08_example_08.py`
+- `ch10/10_example_10.py`
 
 ## Розділ 11. Мультимодальне розуміння і структуровані відповіді
 
@@ -88,6 +88,7 @@
 - `ch11/04_example_04.py`
 - `ch11/06_example_06.py`
 - `ch11/07_example_07.py`
+- `ch11/09_example_09.py`
 
 ## Розділ 12. Заземлення та вбудовані інструменти
 
@@ -97,10 +98,10 @@
 - `ch12/04_example_04.py`
 - `ch12/05_example_05.py`
 - `ch12/06_example_06.py`
+- `ch12/08_example_08.py`
 
 ## Розділ 13. Оптимізація: кешування контексту, пакетна обробка й вартість
 
-- `ch13/01_example_01.py`
 - `ch13/02_example_02.py`
 - `ch13/03_example_03.py`
 - `ch13/04_example_04.py`
@@ -108,6 +109,7 @@
 - `ch13/06_example_06.py`
 - `ch13/07_example_07.py`
 - `ch13/08_example_08.py`
+- `ch13/09_example_09.py`
 
 ## Розділ 14. Live API і генерація медіа
 
@@ -143,32 +145,22 @@
 
 ## Розділ 19. Безпека застосунків і ризики
 
-- `ch19/01_example_01.py`
 - `ch19/02_example_02.py`
-- `ch19/03_example_03.py`
-- `ch19/04_example_04.py`
 - `ch19/05_example_05.py`
-- `ch19/06_example_06.py`
 - `ch19/07_example_07.py`
 
 ## Розділ 20. Оцінювання застосунків на Gemini
 
 - `ch20/01_example_01.py`
-- `ch20/02_example_02.py`
 - `ch20/03_example_03.py`
 - `ch20/04_example_04.py`
-- `ch20/05_test_golden_smoke.py`
+- `ch20/05_example_05.py`
+- `ch20/06_test_golden_smoke.py`
 
 ## Розділ 21. Пошук доповненою генерацією: ембедінги, File Search і RAG Engine
 
-- `ch21/01_example_01.py`
-- `ch21/02_example_02.py`
-- `ch21/03_example_03.py`
-- `ch21/04_example_04.py`
-- `ch21/05_example_05.py`
-- `ch21/06_example_06.py`
-- `ch21/07_example_07.py`
 - `ch21/08_example_08.py`
+- `ch21/09_example_09.py`
 
 ## Розділ 22. Комп'ютерне використання та браузерні агенти
 
@@ -179,14 +171,15 @@
 - `ch22/05_example_05.py`
 - `ch22/06_example_06.py`
 - `ch22/07_example_07.py`
+- `ch22/08_example_08.py`
 
 ## Розділ 23. Промислова експлуатація на Gemini Enterprise Agent Platform
 
-- `ch23/01_example_01.py`
 - `ch23/02_example_02.py`
 - `ch23/03_example_03.py`
-- `ch23/04_example_04.py`
-- `ch23/05_example_05.py`
+- `ch23/06_example_06.py`
+- `ch23/07_example_07.py`
+- `ch23/08_example_08.py`
 
 ## Розділ 24. Відповідальний ШІ: упередженість, справедливість і вплив
 
@@ -207,6 +200,7 @@
 - `appendix_A/10_example_10.py`
 - `appendix_A/11_example_11.py`
 - `appendix_A/12_example_12.py`
+- `appendix_A/13_example_13.py`
 
 ## Додаток Г. Довідник рецептів коду
 

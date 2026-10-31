@@ -1,10 +1,10 @@
-# Розділ 8. Інженерія підказок для Gemini – приклад 1 (рукопис: 08-pidkazky.md, рядок 61)
+# Розділ 8. Інженерія підказок для Gemini – приклад 1 (рукопис: 08-pidkazky.md, рядок 63)
 from datetime import date
 
 from google import genai
 from google.genai import types
 
-from trembita.prompts import SYSTEM_INSTRUCTION   # підрозділ 8.9
+from trembita.prompts import SYSTEM_INSTRUCTION   # підрозділ 8.8
 
 client = genai.Client()
 

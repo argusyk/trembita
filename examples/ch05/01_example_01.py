@@ -20,6 +20,6 @@ claims_safety = [
 
 resp = client.models.generate_content(
     model=MODEL_MAIN,
-    contents="Стисло підсумуй претензію клієнта до SM-2610-0042: ...",
+    contents="Стисло підсумуй претензію клієнта до SM-2610-0117: ...",
     config=types.GenerateContentConfig(safety_settings=claims_safety),
 )

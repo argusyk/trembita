@@ -18,4 +18,5 @@ meta = resp.candidates[0].grounding_metadata
 if meta:                                         # модель могла й не шукати
     print("Запити:", meta.web_search_queries)
     for i, chunk in enumerate(meta.grounding_chunks or []):
-        print(f"[{i + 1}] {chunk.web.title} – {chunk.web.domain}")
+        if chunk.web:
+            print(f"[{i + 1}] {chunk.web.title} – {chunk.web.domain}")

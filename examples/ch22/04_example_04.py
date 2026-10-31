@@ -1,27 +1,40 @@
-# Розділ 22. Комп'ютерне використання та браузерні агенти – приклад 4 (рукопис: 22-computer-use.md, рядок 202)
-def run_task(page: Page, task: str, max_steps: int = 40) -> str:
-    shot = page.screenshot(type="png")
-    contents = [types.Content(role="user", parts=[
-        types.Part(text=task), types.Part.from_bytes(data=shot, mime_type="image/png")])]
-    for step in range(max_steps):
-        resp = client.models.generate_content(model=MODEL_CU, contents=contents, config=config)
-        contents.append(resp.candidates[0].content)       # разом із підписами думок
-        if not resp.function_calls:
-            return resp.text or ""                        # модель завершила задачу
-        replies = []
-        for call in resp.function_calls:
-            args, extra = dict(call.args or {}), {}
-            decision = args.pop("safety_decision", None)
-            if decision and decision.get("decision") == "require_confirmation":
-                if not ask_human(call.name, args, decision.get("explanation", "")):
-                    return f"Зупинено людиною на кроці {step}: {call.name}"
-                extra["safety_acknowledgement"] = "true"
-            execute(page, call.name, args)
-            replies.append(types.Part.from_function_response(
-                name=call.name,
-                response={"url": page.url, **extra},
-                parts=[types.FunctionResponsePart(inline_data=types.FunctionResponseBlob(
-                    mime_type="image/png", data=page.screenshot(type="png")))],
-            ))
-        contents.append(types.Content(role="user", parts=replies))
-    return "Перевищено ліміт кроків"
+# Розділ 22. Комп'ютерне використання та браузерні агенти – приклад 4 (рукопис: 22-computer-use.md, рядок 192)
+def execute(page: Page, name: str, args: dict) -> None:
+    """Виконує одну передвизначену дію (назви 2.5 і 3.x)."""
+    if name in ("click_at", "click", "right_click"):
+        page.mouse.click(*to_pixels(args["x"], args["y"]),
+                         button="right" if name == "right_click" else "left")
+    elif name == "double_click":
+        page.mouse.dblclick(*to_pixels(args["x"], args["y"]))
+    elif name in ("hover_at", "move"):
+        page.mouse.move(*to_pixels(args["x"], args["y"]))
+    elif name == "type_text_at":                     # клік + очищення + текст
+        page.mouse.click(*to_pixels(args["x"], args["y"]))
+        if args.get("clear_before_typing", True):
+            page.keyboard.press("Control+A")
+            page.keyboard.press("Delete")
+        page.keyboard.type(args["text"])
+        if args.get("press_enter", True):
+            page.keyboard.press("Enter")
+    elif name == "type":                             # текст у поле з фокусом
+        page.keyboard.type(args["text"])
+        if args.get("press_enter"):
+            page.keyboard.press("Enter")
+    elif name in ("scroll_at", "scroll", "scroll_document"):
+        if "x" in args:
+            page.mouse.move(*to_pixels(args["x"], args["y"]))
+        step = scroll_step(args)
+        dx, dy = {"up": (0, -step), "down": (0, step),
+                  "left": (-step, 0), "right": (step, 0)}[args["direction"]]
+        page.mouse.wheel(dx, dy)
+    elif name == "navigate":
+        page.goto(args["url"])
+    elif name == "go_back":
+        page.go_back()
+    elif name in ("key_combination", "hotkey", "press_key"):
+        page.keyboard.press(to_playwright_keys(args.get("keys") or args["key"]))
+    elif name in ("wait_5_seconds", "wait"):
+        page.wait_for_timeout(1000 * args.get("seconds", 5))
+    elif name != "take_screenshot":                  # знімок і так іде після кожної дії
+        raise ValueError(f"Невідома дія: {name}")
+    page.wait_for_load_state()

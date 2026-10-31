@@ -1,17 +1,20 @@
-# Розділ 1. Що таке Gemini: Google DeepMind, екосистема й наскрізний приклад – приклад 1 (рукопис: 01-vstup-gemini.md, рядок 126)
+# Розділ 1. Що таке Gemini: Google DeepMind, екосистема й наскрізний приклад – приклад 1 (рукопис: 01-vstup-gemini.md, рядок 181)
 from google import genai
+from google.genai import types
 
-client = genai.Client()  # ключ береться зі змінної GEMINI_API_KEY
-first = client.interactions.create(
-    model="gemini-3.8-flash",
-    input="Які документи потрібні для перевезення вантажу до Польщі?",
-)
-print(first.output_text)
+client = genai.Client()  # читає GEMINI_API_KEY із середовища
 
-# продовження розмови: історію сервер підставить сам
-follow = client.interactions.create(
+response = client.models.generate_content(
     model="gemini-3.8-flash",
-    input="А якщо вантаж небезпечний?",
-    previous_interaction_id=first.id,
+    contents="Клієнт питає: скільки днів їде вантаж зі Львова до Варшави?",
+    config=types.GenerateContentConfig(
+        system_instruction=(
+            "Ти – «Трембіта», асистент логістичної компанії «Смерека». "
+            "Відповідай українською, коротко й ввічливо. "
+            "Якщо не маєш точних даних, прямо скажи про це."
+        ),
+        max_output_tokens=1024,
+        thinking_config=types.ThinkingConfig(thinking_level="low"),
+    ),
 )
-print(follow.output_text)
+print(response.text)

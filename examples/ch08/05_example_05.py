@@ -1,4 +1,4 @@
-# Розділ 8. Інженерія підказок для Gemini – приклад 5 (рукопис: 08-pidkazky.md, рядок 280)
+# Розділ 8. Інженерія підказок для Gemini – приклад 5 (рукопис: 08-pidkazky.md, рядок 287)
 import json
 
 from google import genai
@@ -15,9 +15,11 @@ def accuracy(system: str, model: str = "gemini-3.1-flash-lite") -> float:
         resp = client.models.generate_content(
             model=model,
             contents=f"Претензія: {case['text']}\nКатегорія:",
-            config=types.GenerateContentConfig(system_instruction=system, max_output_tokens=10),
+            config=types.GenerateContentConfig(
+                system_instruction=system, max_output_tokens=256,    # запас на думки, підрозділ 8.3
+                thinking_config=types.ThinkingConfig(thinking_level="low")),
         )
-        hits += (resp.text or "").strip().lower() == case["label"]
+        hits += (resp.text or "").strip().lower().rstrip(".") == case["label"]
     return hits / len(CASES)
 
 

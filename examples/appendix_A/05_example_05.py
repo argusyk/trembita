@@ -1,4 +1,4 @@
-# Додаток А. Практикум – приклад 5 (рукопис: 90-dodatok-a.md, рядок 245)
+# Додаток А. Практикум – приклад 5 (рукопис: 90-dodatok-a.md, рядок 265)
 from pathlib import Path
 from pydantic import BaseModel, Field
 from google import genai

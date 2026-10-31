@@ -1,4 +1,4 @@
-# Розділ 12. Заземлення та вбудовані інструменти – приклад 3 (рукопис: 12-zazemlennia.md, рядок 107)
+# Розділ 12. Заземлення та вбудовані інструменти – приклад 3 (рукопис: 12-zazemlennia.md, рядок 117)
 from google import genai
 from google.genai import types
 
@@ -19,6 +19,8 @@ resp = client.models.generate_content(
     ),
 )
 print(resp.text)
-for chunk in resp.candidates[0].grounding_metadata.grounding_chunks or []:
-    if chunk.maps:
-        print(chunk.maps.title, chunk.maps.uri)   # посилання на картку місця
+meta = resp.candidates[0].grounding_metadata
+if meta:                                         # модель могла й не звертатися до карт
+    for chunk in meta.grounding_chunks or []:
+        if chunk.maps:
+            print(chunk.maps.title, chunk.maps.uri)   # посилання на картку місця

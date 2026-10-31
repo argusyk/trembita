@@ -1,12 +1,12 @@
-# Розділ 6. Родина моделей Gemini і відкриті моделі Gemma – приклад 6 (рукопис: 06-rodyna-modeley.md, рядок 293)
+# Розділ 6. Родина моделей Gemini і відкриті моделі Gemma – приклад 6 (рукопис: 06-rodyna-modeley.md, рядок 307)
 from google.genai import errors
 
-from trembita.config import MODEL_EMBED, MODEL_LITE, MODEL_MAIN, MODEL_SMART
+from trembita.config import MODEL_EMBED, MODEL_FALLBACK, MODEL_LITE, MODEL_MAIN, MODEL_SMART
 
 def verify_models(min_input_tokens: int = 200_000) -> list[str]:
     """Перевіряє на старті, що закріплені моделі доступні; повертає перелік проблем."""
     problems = []
-    for model_id in (MODEL_MAIN, MODEL_SMART, MODEL_LITE, MODEL_EMBED):
+    for model_id in (MODEL_MAIN, MODEL_SMART, MODEL_LITE, MODEL_FALLBACK, MODEL_EMBED):
         try:
             m = client.models.get(model=model_id)
         except errors.APIError as e:          # 404 – модель зникла або недоступна ключу

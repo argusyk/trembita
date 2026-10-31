@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 11 (рукопис: 93-dodatok-g.md, рядок 183)
+# Додаток Г. Довідник рецептів коду – приклад 11 (рукопис: 93-dodatok-g.md, рядок 184)
 cfg = types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_level="high"))
 history = [types.Content(role="user", parts=[types.Part(text="Маршрут Львів – Відень: Чоп чи Краковець?")])]
 resp = client.models.generate_content(model="gemini-4-argon", contents=history, config=cfg)

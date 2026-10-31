@@ -1,4 +1,4 @@
-# Розділ 11. Мультимодальне розуміння і структуровані відповіді – приклад 6 (рукопис: 11-multymodalnist.md, рядок 290)
+# Розділ 11. Мультимодальне розуміння і структуровані відповіді – приклад 6 (рукопис: 11-multymodalnist.md, рядок 294)
 import enum
 from google import genai
 from google.genai import types

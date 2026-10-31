@@ -1,4 +1,4 @@
-# Розділ 10. Виклик функцій – приклад 5 (рукопис: 10-funktsii.md, рядок 240)
+# Розділ 10. Виклик функцій – приклад 5 (рукопис: 10-funktsii.md, рядок 250)
 from google.genai import types
 
 force_tracking = types.ToolConfig(

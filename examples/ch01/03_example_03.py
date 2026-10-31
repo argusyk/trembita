@@ -1,9 +1,17 @@
-# Розділ 1. Що таке Gemini: Google DeepMind, екосистема й наскрізний приклад – приклад 3 (рукопис: 01-vstup-gemini.md, рядок 236)
-candidate = response.candidates[0]
-print(candidate.finish_reason)        # FinishReason.STOP – природне завершення
+# Розділ 1. Що таке Gemini: Google DeepMind, екосистема й наскрізний приклад – приклад 3 (рукопис: 01-vstup-gemini.md, рядок 259)
+from google import genai
 
-usage = response.usage_metadata
-print("вхід:", usage.prompt_token_count)
-print("вихід:", usage.candidates_token_count)
-print("мислення:", usage.thoughts_token_count)
-print("разом:", usage.total_token_count)
+client = genai.Client()  # ключ береться зі змінної GEMINI_API_KEY
+first = client.interactions.create(
+    model="gemini-3.8-flash",
+    input="Які документи потрібні для перевезення вантажу до Польщі?",
+)
+print(first.output_text)
+
+# продовження розмови: історію сервер підставить сам
+follow = client.interactions.create(
+    model="gemini-3.8-flash",
+    input="А якщо вантаж небезпечний?",
+    previous_interaction_id=first.id,
+)
+print(follow.output_text)

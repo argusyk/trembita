@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 34 (рукопис: 93-dodatok-g.md, рядок 668)
+# Додаток Г. Довідник рецептів коду – приклад 34 (рукопис: 93-dodatok-g.md, рядок 683)
 import asyncio
 from google.adk.agents import Agent
 from google.adk.runners import Runner

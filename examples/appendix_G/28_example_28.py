@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 28 (рукопис: 93-dodatok-g.md, рядок 537)
+# Додаток Г. Довідник рецептів коду – приклад 28 (рукопис: 93-dodatok-g.md, рядок 547)
 REGULATIONS = open("reglament_smereka.md", encoding="utf-8").read()   # ~120 тис. токенів
 cache = client.caches.create(
     model="gemini-3.8-flash",                    # кеш прив'язаний до моделі

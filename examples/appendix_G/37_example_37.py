@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 37 (рукопис: 93-dodatok-g.md, рядок 745)
+# Додаток Г. Довідник рецептів коду – приклад 37 (рукопис: 93-dodatok-g.md, рядок 761)
 H, T = types.HarmCategory, types.HarmBlockThreshold
 config = types.GenerateContentConfig(safety_settings=[
     types.SafetySetting(category=H.HARM_CATEGORY_HARASSMENT, threshold=T.BLOCK_MEDIUM_AND_ABOVE),

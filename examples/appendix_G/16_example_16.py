@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 16 (рукопис: 93-dodatok-g.md, рядок 288)
+# Додаток Г. Довідник рецептів коду – приклад 16 (рукопис: 93-dodatok-g.md, рядок 289)
 import asyncio
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client

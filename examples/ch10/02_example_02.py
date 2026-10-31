@@ -22,7 +22,7 @@ def run_with_tools(client: genai.Client, question: str, tool: types.Tool, max_st
         for fc in resp.function_calls:
             fn = REGISTRY.get(fc.name)
             try:
-                result = fn(**fc.args) if fn else {"error": f"невідома функція {fc.name}"}
+                result = fn(**(fc.args or {})) if fn else {"error": f"невідома функція {fc.name}"}
             except Exception as exc:                  # помилку повертаємо моделі як дані
                 result = {"error": str(exc)}
             parts.append(types.Part(function_response=types.FunctionResponse(

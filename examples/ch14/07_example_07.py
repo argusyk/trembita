@@ -1,4 +1,4 @@
-# Розділ 14. Live API і генерація медіа – приклад 7 (рукопис: 14-live-media.md, рядок 316)
+# Розділ 14. Live API і генерація медіа – приклад 7 (рукопис: 14-live-media.md, рядок 337)
 import os
 import time
 from google import genai

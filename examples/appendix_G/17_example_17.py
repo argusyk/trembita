@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 17 (рукопис: 93-dodatok-g.md, рядок 313)
+# Додаток Г. Довідник рецептів коду – приклад 17 (рукопис: 93-dodatok-g.md, рядок 314)
 photo = open("cmr_SM-2610-0042.jpg", "rb").read()
 resp = client.models.generate_content(
     model="gemini-3.8-flash",

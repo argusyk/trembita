@@ -1,28 +1,21 @@
-# Розділ 19. Безпека застосунків і ризики – приклад 7 (рукопис: 19-bezpeka-zastosunkiv.md, рядок 322)
-from typing import Any, Optional
+# Розділ 19. Безпека застосунків і ризики – приклад 7 (рукопис: 19-bezpeka-zastosunkiv.md, рядок 361)
 from google.adk.agents import Agent
-from google.adk.tools import BaseTool, FunctionTool, ToolContext
+from google.adk.tools import FunctionTool
 from trembita.config import MODEL_MAIN
 from trembita.prompts import SYSTEM_INSTRUCTION
+from trembita.security import flag_untrusted, policy_guard
 from trembita.tools import create_pickup, find_warehouse, track_shipment
 
-MAX_PICKUP_KG = 1500.0
-
-def policy_guard(tool: BaseTool, args: dict[str, Any],
-                 tool_context: ToolContext) -> Optional[dict]:
-    """Детерміновані правила поверх моделі: модель їх не обійде."""
-    if tool.name == "create_pickup":
-        if float(args.get("weight_kg", 0)) > MAX_PICKUP_KG:
-            return {"error": "Понад 1500 кг: оформлення лише через диспетчера."}
-        if tool_context.state.get("untrusted_content_seen"):
-            return {"error": "Після читання зовнішніх документів дія недоступна."}
-    return None                                    # None означає: виконати інструмент
+def read_email(message_id: str) -> dict:
+    """Повертає тему й текст листа клієнта зі скриньки відділу претензій."""
+    ...  # інтеграція з поштою «Смереки» – поза пакетом trembita
 
 dispatcher = Agent(
     name="trembita_dispatch",
     model=MODEL_MAIN,
     instruction=SYSTEM_INSTRUCTION,
-    tools=[track_shipment, find_warehouse,
+    tools=[track_shipment, find_warehouse, read_email,
            FunctionTool(create_pickup, require_confirmation=True)],  # питає людину
-    before_tool_callback=policy_guard,
+    before_tool_callback=policy_guard,      # правила до виконання інструмента
+    after_tool_callback=flag_untrusted,     # прапорець після read_email
 )

@@ -1,4 +1,4 @@
-# Додаток А. Практикум – приклад 3 (рукопис: 90-dodatok-a.md, рядок 164)
+# Додаток А. Практикум – приклад 3 (рукопис: 90-dodatok-a.md, рядок 184)
 import time
 from google import genai
 from google.genai import types

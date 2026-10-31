@@ -1,8 +1,9 @@
-# Додаток Г. Довідник рецептів коду – приклад 35 (рукопис: 93-dodatok-g.md, рядок 695)
+# Додаток Г. Довідник рецептів коду – приклад 35 (рукопис: 93-dodatok-g.md, рядок 710)
 from google.adk.a2a.utils.agent_to_a2a import to_a2a
 from google.adk.agents.remote_a2a_agent import AGENT_CARD_WELL_KNOWN_PATH, RemoteA2aAgent
 
-# 1) свій агент для партнерів; запуск: uvicorn server_tracker:app
+# 1) окремий агент лише для читання; запуск за проксі з автентифікацією:
+#    uvicorn server_tracker:app (до uvicorn ззовні не дістатися)
 app = to_a2a(agent, host="agents.smereka.example", port=443, protocol="https")
 
 # 2) агент партнера як субагент

@@ -1,16 +1,25 @@
-# Розділ 12. Заземлення та вбудовані інструменти – приклад 2 (рукопис: 12-zazemlennia.md, рядок 75)
+# Розділ 12. Заземлення та вбудовані інструменти – приклад 2 (рукопис: 12-zazemlennia.md, рядок 76)
+from collections import defaultdict
+
 def add_citations(resp) -> str:
     """Вставляє [1], [2]... після фрагментів, підтверджених джерелами."""
-    meta = resp.candidates[0].grounding_metadata
-    raw = resp.text.encode("utf-8")              # індекси сегментів – у байтах!
-    if not meta or not meta.grounding_supports:
-        return resp.text
-    # з кінця до початку, щоб вставки не зсували ще не оброблені позиції
-    supports = sorted(meta.grounding_supports, key=lambda s: s.segment.end_index, reverse=True)
-    for sup in supports:
-        if not sup.grounding_chunk_indices:
+    cand = resp.candidates[0] if resp.candidates else None
+    if cand is None or cand.content is None:
+        return ""
+    meta = cand.grounding_metadata                   # None, якщо модель не шукала
+    by_part = defaultdict(list)                      # сегменти, згруповані за part_index
+    for sup in (meta.grounding_supports or []) if meta else []:
+        if sup.segment and sup.grounding_chunk_indices:
+            by_part[sup.segment.part_index or 0].append(sup)
+    out = []
+    for idx, part in enumerate(cand.content.parts or []):
+        if not part.text or part.thought:
             continue
-        marks = "".join(f"[{i + 1}]" for i in sup.grounding_chunk_indices)
-        end = sup.segment.end_index
-        raw = raw[:end] + marks.encode("utf-8") + raw[end:]
-    return raw.decode("utf-8")
+        raw = part.text.encode("utf-8")              # зсуви – у байтах від початку частини!
+        # з кінця до початку, щоб вставки не зсували ще не оброблені позиції
+        for sup in sorted(by_part[idx], key=lambda s: s.segment.end_index or 0, reverse=True):
+            end = sup.segment.end_index or 0
+            marks = "".join(f"[{i + 1}]" for i in sup.grounding_chunk_indices)
+            raw = raw[:end] + marks.encode("utf-8") + raw[end:]
+        out.append(raw.decode("utf-8"))
+    return "".join(out)

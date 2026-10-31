@@ -1,4 +1,4 @@
-# Розділ 6. Родина моделей Gemini і відкриті моделі Gemma – приклад 3 (рукопис: 06-rodyna-modeley.md, рядок 171)
+# Розділ 6. Родина моделей Gemini і відкриті моделі Gemma – приклад 3 (рукопис: 06-rodyna-modeley.md, рядок 185)
 import logging
 
 from google.genai import types

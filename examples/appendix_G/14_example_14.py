@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 14 (рукопис: 93-dodatok-g.md, рядок 245)
+# Додаток Г. Довідник рецептів коду – приклад 14 (рукопис: 93-dodatok-g.md, рядок 246)
 REGISTRY = {"get_tariff": get_tariff}
 cfg = types.GenerateContentConfig(
     tools=[smereka_tools],

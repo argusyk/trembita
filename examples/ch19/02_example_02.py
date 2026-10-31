@@ -1,17 +1,23 @@
-# Розділ 19. Безпека застосунків і ризики – приклад 2 (рукопис: 19-bezpeka-zastosunkiv.md, рядок 122)
+# Розділ 19. Безпека застосунків і ризики – приклад 2 (рукопис: 19-bezpeka-zastosunkiv.md, рядок 164)
 from google.genai import types
+from trembita.client import make_client
+from trembita.config import MODEL_MAIN
 
-# Пороги «Трембіти»: суворо до образ, поблажливіше до тем небезпечних вантажів
-SAFETY = [
-    types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_HARASSMENT,
-                        threshold=types.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE),
-    types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-                        threshold=types.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE),
-    types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-                        threshold=types.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE),
-    # ADR-класи, вибухові й легкозаймисті вантажі – робоча тема диспетчерів
-    types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-                        threshold=types.HarmBlockThreshold.BLOCK_ONLY_HIGH),
-]
+PROJECT, LOCATION = "smereka-prod", "europe-west1"   # регіон, де створено шаблони
+TPL = f"projects/{PROJECT}/locations/{LOCATION}/templates"
 
-config = types.GenerateContentConfig(safety_settings=SAFETY)
+client = make_client(vertexai=True, project=PROJECT, location=LOCATION)  # Agent Platform
+armor = types.ModelArmorConfig(
+    prompt_template_name=f"{TPL}/trembita-input",     # впровадження, джейлбрейк, URL
+    response_template_name=f"{TPL}/trembita-output",  # персональні дані, шкідливий вміст
+)
+
+def ask_armored(text: str) -> str:
+    resp = client.models.generate_content(
+        model=MODEL_MAIN, contents=text,
+        config=types.GenerateContentConfig(model_armor_config=armor),
+    )
+    fb = resp.prompt_feedback
+    if fb is not None and fb.block_reason == types.BlockedReason.MODEL_ARMOR:
+        return "Запит містить ознаки атаки й не буде опрацьований."
+    return resp.text or ""

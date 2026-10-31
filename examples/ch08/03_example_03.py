@@ -1,4 +1,4 @@
-# Розділ 8. Інженерія підказок для Gemini – приклад 3 (рукопис: 08-pidkazky.md, рядок 153)
+# Розділ 8. Інженерія підказок для Gemini – приклад 3 (рукопис: 08-pidkazky.md, рядок 168)
 from google import genai
 from google.genai import types
 

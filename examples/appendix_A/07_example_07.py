@@ -1,4 +1,4 @@
-# Додаток А. Практикум – приклад 7 (рукопис: 90-dodatok-a.md, рядок 335)
+# Додаток А. Практикум – приклад 7 (рукопис: 90-dodatok-a.md, рядок 355)
 from google import genai
 from google.genai import types
 from trembita.config import MODEL_LITE

@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 27 (рукопис: 93-dodatok-g.md, рядок 509)
+# Додаток Г. Довідник рецептів коду – приклад 27 (рукопис: 93-dodatok-g.md, рядок 518)
 import time
 
 store = client.file_search_stores.create(
@@ -15,6 +15,7 @@ resp = client.models.generate_content(
     config=types.GenerateContentConfig(tools=[types.Tool(file_search=types.FileSearch(
         file_search_store_names=[store.name], top_k=5))]),
 )
-for ch in resp.candidates[0].grounding_metadata.grounding_chunks or []:
+meta = resp.candidates[0].grounding_metadata if resp.candidates else None
+for ch in (meta.grounding_chunks or []) if meta else []:
     if ch.retrieved_context:
         print(ch.retrieved_context.title, "стор.", ch.retrieved_context.page_number)

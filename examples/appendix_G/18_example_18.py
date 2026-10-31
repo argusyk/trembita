@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 18 (рукопис: 93-dodatok-g.md, рядок 330)
+# Додаток Г. Довідник рецептів коду – приклад 18 (рукопис: 93-dodatok-g.md, рядок 331)
 contract = client.files.upload(file="dohovir_perevezennia_2026.pdf")
 resp = client.models.generate_content(
     model="gemini-3.8-flash",

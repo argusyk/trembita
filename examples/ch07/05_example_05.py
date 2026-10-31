@@ -1,4 +1,4 @@
-# Розділ 7. Gemini API і Google Gen AI SDK – приклад 5 (рукопис: 07-api.md, рядок 222)
+# Розділ 7. Gemini API і Google Gen AI SDK – приклад 5 (рукопис: 07-api.md, рядок 225)
 from google import genai
 from google.genai import types
 

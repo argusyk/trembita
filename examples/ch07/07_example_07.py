@@ -1,4 +1,4 @@
-# Розділ 7. Gemini API і Google Gen AI SDK – приклад 7 (рукопис: 07-api.md, рядок 313)
+# Розділ 7. Gemini API і Google Gen AI SDK – приклад 7 (рукопис: 07-api.md, рядок 316)
 from google import genai
 
 client = genai.Client()

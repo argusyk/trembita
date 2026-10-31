@@ -1,4 +1,4 @@
-# Розділ 13. Оптимізація: кешування контексту, пакетна обробка й вартість – приклад 2 (рукопис: 13-optymizatsiya.md, рядок 103)
+# Розділ 13. Оптимізація: кешування контексту, пакетна обробка й вартість – приклад 2 (рукопис: 13-optymizatsiya.md, рядок 117)
 from google import genai
 from google.genai import types
 from trembita.config import MODEL_MAIN

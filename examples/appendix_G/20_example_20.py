@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 20 (рукопис: 93-dodatok-g.md, рядок 372)
+# Додаток Г. Довідник рецептів коду – приклад 20 (рукопис: 93-dodatok-g.md, рядок 373)
 from pydantic import BaseModel, Field
 
 class CargoItem(BaseModel):
@@ -18,5 +18,8 @@ resp = client.models.generate_content(
     config=types.GenerateContentConfig(response_mime_type="application/json",
                                        response_schema=Waybill),   # або list[Waybill]
 )
-waybill: Waybill = resp.parsed
-print(waybill.number, sum(i.weight_kg for i in waybill.items))
+waybill = resp.parsed                        # None, якщо відповідь не пройшла схему
+if waybill is None:
+    print("Потрібен ручний розбір:", (resp.text or "")[:200])
+else:
+    print(waybill.number, sum(i.weight_kg for i in waybill.items))

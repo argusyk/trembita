@@ -1,4 +1,4 @@
-# Додаток А. Практикум – приклад 9 (рукопис: 90-dodatok-a.md, рядок 418)
+# Додаток А. Практикум – приклад 9 (рукопис: 90-dodatok-a.md, рядок 441)
 from google.adk.agents import Agent
 from google.adk.tools import FunctionTool
 from trembita.config import MODEL_MAIN

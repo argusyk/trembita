@@ -1,4 +1,4 @@
-# Розділ 18. Gemini для знаннєвої роботи: Workspace, NotebookLM, Deep Research і Gemini Enterprise – приклад 2 (рукопис: 18-znannieva-robota.md, рядок 155)
+# Розділ 18. Gemini для знаннєвої роботи: Workspace, NotebookLM, Deep Research і Gemini Enterprise – приклад 2 (рукопис: 18-znannieva-robota.md, рядок 157)
 # Спільне планування: спершу план, дослідження – після підтвердження
 plan = wait(client.interactions.create(
     agent=DR_AGENT,
@@ -14,4 +14,4 @@ report = wait(client.interactions.create(
     previous_interaction_id=plan.id,  # продовження тієї самої розмови
     background=True,
 ))
-print(report.output_text[:2000])
+print((report.output_text or "")[:2000])

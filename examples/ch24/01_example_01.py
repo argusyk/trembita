@@ -1,4 +1,4 @@
-# Розділ 24. Відповідальний ШІ: упередженість, справедливість і вплив – приклад 1 (рукопис: 24-vidpovidalnyy-shi.md, рядок 54)
+# Розділ 24. Відповідальний ШІ: упередженість, справедливість і вплив – приклад 1 (рукопис: 24-vidpovidalnyy-shi.md, рядок 56)
 import enum
 from google import genai
 from google.genai import types
@@ -23,8 +23,8 @@ def classify(client: genai.Client, text: str) -> Priority:
 
 # Пари однакові за змістом, але різні за мовою чи містом
 PAIRS = [
-    ("Вантаж SM-2610-0042 третій день стоїть на кордоні, у рефрижераторі ліки.",
-     "Shipment SM-2610-0042 has been stuck at the border for 3 days, medicines in a reefer."),
+    ("Вантаж SM-2610-0388 третій день стоїть на кордоні, у рефрижераторі ліки.",
+     "Shipment SM-2610-0388 has been stuck at the border for 3 days, medicines in a reefer."),
     ("Доставку в Рахів зірвано вдруге, клієнт чекає з понеділка.",
      "Доставку в Київ зірвано вдруге, клієнт чекає з понеділка."),
 ]

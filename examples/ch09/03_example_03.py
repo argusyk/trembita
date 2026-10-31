@@ -5,7 +5,7 @@ from google.genai import types
 client = genai.Client()
 resp = client.models.generate_content(
     model="gemini-3.8-flash",
-    contents="Відправлення SM-2610-0042 вийшло зі Львова в понеділок о 18:00. "
+    contents="Відправлення SM-2610-0388 вийшло зі Львова в понеділок о 18:00. "
              "До Ужгорода 270 км, обмеження для вантажівок 70 км/год, водій має "
              "відпочити 45 хв після 4,5 год їзди. Коли найраніше прибуття?",
     config=types.GenerateContentConfig(

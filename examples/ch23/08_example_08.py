@@ -1,4 +1,4 @@
-# Розділ 23. Промислова експлуатація на Gemini Enterprise Agent Platform – приклад 5 (рукопис: 23-produkshn.md, рядок 352)
+# Розділ 23. Промислова експлуатація на Gemini Enterprise Agent Platform – приклад 8 (рукопис: 23-produkshn.md, рядок 416)
 from google.genai import types
 
 # Було (Gemini 2.5 Flash, виведено 20.10.2026):

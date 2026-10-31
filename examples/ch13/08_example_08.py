@@ -1,33 +1,39 @@
-# Розділ 13. Оптимізація: кешування контексту, пакетна обробка й вартість – приклад 8 (рукопис: 13-optymizatsiya.md, рядок 417)
-import datetime as dt
+# Розділ 13. Оптимізація: кешування контексту, пакетна обробка й вартість – приклад 8 (рукопис: 13-optymizatsiya.md, рядок 374)
+import enum
 from google import genai
-from google.genai import errors, types
-from trembita.config import MODEL_MAIN
-from trembita.prompts import SYSTEM_INSTRUCTION
+from google.genai import types
+from trembita.config import MODEL_LITE, MODEL_MAIN, MODEL_SMART
+
+client = genai.Client()
 
 
-class RegulationsCache:
-    """Явний кеш регламенту «Смереки» лише на робочі години диспетчерської."""
+class Route(enum.Enum):
+    SIMPLE = "simple"        # довідка: статус, графік складу
+    STANDARD = "standard"    # розрахунок, пояснення правил
+    COMPLEX = "complex"      # претензія, спір, митниця, юридичні нюанси
 
-    def __init__(self, client: genai.Client, text: str, shift_end_utc: int = 17):
-        self.client, self.text, self.shift_end_utc = client, text, shift_end_utc
-        self.name: str | None = None
 
-    def ensure(self) -> str | None:
-        now = dt.datetime.now(dt.timezone.utc)
-        end = now.replace(hour=self.shift_end_utc, minute=0, second=0, microsecond=0)
-        if now >= end:
-            return None                       # поза зміною: працює неявне кешування
-        if self.name:
-            try:
-                self.client.caches.get(name=self.name)
-                return self.name
-            except errors.ClientError:
-                self.name = None              # кеш сплив або його видалили
-        cache = self.client.caches.create(model=MODEL_MAIN, config=types.CreateCachedContentConfig(
-            display_name="reglament-smereka", system_instruction=SYSTEM_INSTRUCTION,
-            contents=[types.Content(role="user", parts=[types.Part(text=self.text)])],
-            expire_time=end,                  # живе рівно до кінця зміни
-        ))
-        self.name = cache.name
-        return self.name
+ROUTER = ("Оціни складність звернення до логістичної компанії «Смерека» "
+          "і поверни один клас: simple, standard або complex.\nЗвернення: ")
+PLAN = {Route.SIMPLE: (MODEL_MAIN, "low"), Route.STANDARD: (MODEL_MAIN, "medium"),
+        Route.COMPLEX: (MODEL_SMART, "high")}
+
+
+def classify(question: str) -> Route:
+    resp = client.models.generate_content(
+        model=MODEL_LITE, contents=ROUTER + question,
+        config=types.GenerateContentConfig(response_mime_type="text/x.enum", response_schema=Route),
+    )
+    try:
+        return Route((resp.text or "").strip())
+    except ValueError:
+        return Route.STANDARD                 # сумнів – середній маршрут, а не найдешевший
+
+
+def answer(question: str) -> str:
+    model, level = PLAN[classify(question)]
+    resp = client.models.generate_content(
+        model=model, contents=question,
+        config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_level=level)),
+    )
+    return resp.text

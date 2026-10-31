@@ -1,4 +1,4 @@
-# Розділ 10. Виклик функцій – приклад 6 (рукопис: 10-funktsii.md, рядок 268)
+# Розділ 10. Виклик функцій – приклад 6 (рукопис: 10-funktsii.md, рядок 278)
 from concurrent.futures import ThreadPoolExecutor
 from google.genai import types
 
@@ -6,7 +6,7 @@ def execute_calls(function_calls, registry) -> types.Content:
     """Виконує паралельні виклики одночасно й повертає одну репліку з усіма результатами."""
     def run(fc):
         try:
-            return registry[fc.name](**fc.args)
+            return registry[fc.name](**(fc.args or {}))
         except Exception as exc:
             return {"error": str(exc)}
     with ThreadPoolExecutor(max_workers=4) as pool:

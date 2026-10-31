@@ -1,4 +1,4 @@
-# Додаток А. Практикум – приклад 4 (рукопис: 90-dodatok-a.md, рядок 207)
+# Додаток А. Практикум – приклад 4 (рукопис: 90-dodatok-a.md, рядок 227)
 from trembita.assistant import chat_turn
 from trembita.client import make_client
 

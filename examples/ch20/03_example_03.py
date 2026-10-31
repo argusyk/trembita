@@ -1,30 +1,14 @@
-# Розділ 20. Оцінювання застосунків на Gemini – приклад 3 (рукопис: 20-otsiniuvannia.md, рядок 199)
-from typing import Literal
-from pydantic import BaseModel
-from google.genai import types
-from trembita.client import make_client
-from trembita.config import MODEL_SMART
-
-class Preference(BaseModel):
-    reasoning: str
-    winner: Literal["A", "B", "tie"]
-
-def _compare(question: str, reference: str, a: str, b: str) -> str:
-    resp = make_client().models.generate_content(
-        model=MODEL_SMART,
-        contents=(f"<question>{question}</question>\n<reference>{reference}</reference>\n"
-                  f"<answer_a>{a}</answer_a>\n<answer_b>{b}</answer_b>"),
+# Розділ 20. Оцінювання застосунків на Gemini – приклад 3 (рукопис: 20-otsiniuvannia.md, рядок 184)
+def judge(question: str, reference: str, answer: str, *, tool_outputs=None, model: str = MODEL_SMART,
+          generator_models=(MODEL_MAIN,), client=None) -> Verdict | None:
+    """Поточкова оцінка за рубрикою. Суддя тієї самої моделі, що генерує, заборонений."""
+    _check_judge(model, generator_models)        # ValueError, якщо model є серед generator_models
+    resp = (client or make_client()).models.generate_content(
+        model=model,
+        contents="\n".join([_tag("question", question), _tag("reference", reference),
+                            _tool_block(tool_outputs), _tag("answer", answer)]),
         config=types.GenerateContentConfig(
-            system_instruction="Порівняй дві відповіді за точністю, повнотою дій і тоном. "
-                               "Не віддавай переваги довшій відповіді лише через довжину.",
-            response_mime_type="application/json",
-            response_schema=Preference,
-        ),
+            system_instruction=RUBRIC, response_mime_type="application/json",
+            response_schema=Verdict, thinking_config=types.ThinkingConfig(thinking_level="low")),
     )
-    return resp.parsed.winner
-
-def pairwise(question: str, reference: str, x: str, y: str) -> str:
-    """Повертає 'x', 'y' або 'tie'; суперечливі вердикти дають нічию."""
-    first = {"A": "x", "B": "y", "tie": "tie"}[_compare(question, reference, x, y)]
-    second = {"A": "y", "B": "x", "tie": "tie"}[_compare(question, reference, y, x)]
-    return first if first == second else "tie"
+    return resp.parsed if isinstance(resp.parsed, Verdict) else None

@@ -1,9 +1,9 @@
-# Розділ 5. Безпека й вирівнювання в Google DeepMind – приклад 4 (рукопис: 05-bezpeka-vyrivniuvannia.md, рядок 284)
+# Розділ 5. Безпека й вирівнювання в Google DeepMind – приклад 4 (рукопис: 05-bezpeka-vyrivniuvannia.md, рядок 295)
 from trembita.prompts import SYSTEM_INSTRUCTION
 
 READ_ONLY_TOOLS = {"track_shipment", "get_tariff", "find_warehouse"}
 
-def wrap_untrusted(text: str, source: str) -> str:
+def mark_external(text: str, source: str) -> str:
     # Межі допомагають моделі, але не гарантують захисту
     return f'<external source="{source}">\n{text}\n</external>'
 

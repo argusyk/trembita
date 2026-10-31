@@ -1,4 +1,4 @@
-# Додаток Г. Довідник рецептів коду – приклад 36 (рукопис: 93-dodatok-g.md, рядок 718)
+# Додаток Г. Довідник рецептів коду – приклад 36 (рукопис: 93-dodatok-g.md, рядок 734)
 import numpy as np
 
 def embed(texts: list[str], task: str, dim: int = 768) -> np.ndarray:
@@ -6,7 +6,7 @@ def embed(texts: list[str], task: str, dim: int = 768) -> np.ndarray:
         model="gemini-embedding-2", contents=texts,
         config=types.EmbedContentConfig(task_type=task, output_dimensionality=dim))
     m = np.array([e.values for e in resp.embeddings], dtype=np.float32)
-    return m / np.linalg.norm(m, axis=1, keepdims=True)
+    return m / np.maximum(np.linalg.norm(m, axis=1, keepdims=True), 1e-12)
 
 chunks = ["Вантажі класу ADR 3 приймає лише склад у Львові.",
           "Претензію про пошкодження подають протягом 7 днів."]

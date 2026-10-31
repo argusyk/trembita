@@ -1,4 +1,4 @@
-# Розділ 15. Агенти на Gemini: Agent Development Kit і протокол A2A – приклад 2 (рукопис: 15-ahenty-adk.md, рядок 126)
+# Розділ 15. Агенти на Gemini: Agent Development Kit і протокол A2A – приклад 2 (рукопис: 15-ahenty-adk.md, рядок 128)
 import asyncio
 
 from google.adk.runners import Runner

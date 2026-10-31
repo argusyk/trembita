@@ -1,6 +1,6 @@
-# Додаток А. Практикум – приклад 1 (рукопис: 90-dodatok-a.md, рядок 74)
+# Додаток А. Практикум – приклад 1 (рукопис: 90-dodatok-a.md, рядок 94)
 from google import genai
-from trembita.costs import cost_from_usage, request_cost
+from trembita.costs import cost_from_usage
 
 client = genai.Client()  # ключ – у змінній середовища GEMINI_API_KEY
 SAMPLES = {
@@ -14,5 +14,5 @@ for name, text in SAMPLES.items():
 
 resp = client.models.generate_content(model="gemini-3.8-flash", contents=SAMPLES["речення"])
 um = resp.usage_metadata
-print("Flash, дол.:", cost_from_usage("gemini-3.8-flash", um))
-print("Argon, дол.:", request_cost("gemini-4-argon", um.prompt_token_count, um.candidates_token_count))
+print("Flash, дол.:", cost_from_usage("gemini-3.8-flash", um))   # думки й кеш ураховано
+print("Argon, дол.:", cost_from_usage("gemini-4-argon", um))     # ті самі токени за цінами Argon

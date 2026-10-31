@@ -1,4 +1,4 @@
-# Розділ 11. Мультимодальне розуміння і структуровані відповіді – приклад 7 (рукопис: 11-multymodalnist.md, рядок 338)
+# Розділ 11. Мультимодальне розуміння і структуровані відповіді – приклад 7 (рукопис: 11-multymodalnist.md, рядок 342)
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
@@ -23,5 +23,5 @@ resp = client.models.generate_content(
     config=types.GenerateContentConfig(response_mime_type="application/json",
                                        response_schema=list[Detection]),
 )
-for det in resp.parsed:
+for det in resp.parsed or []:             # None, якщо розбір не вдався
     print(det.label, to_pixels(det, 1920, 1080))

@@ -7,6 +7,7 @@
 | `trembita/` | пакет Python: клієнт із повторами й резервними моделями, інструменти та підтвердження дій, схеми накладних, вартість і кешування, RAG, оцінювання, захисні шари, команда агентів на ADK |
 | `tests/` | тести пакета; працюють без мережі й ключа API |
 | `examples/` | усі приклади Python з книги за розділами (`examples/README.md`) |
+| `examples_en/` | ті самі приклади з англійського видання «Secrets of Gemini AI» (коментарі й підказки англійською) |
 | `scripts/check_examples.py` | перевірка прикладів без мережі: синтаксис, імпорти, імена класів і методів SDK |
 
 ## Швидкий старт
@@ -29,3 +30,7 @@ python -c "from trembita.client import ask; print(ask('Скільки кошту
 ## Ліцензія
 
 MIT – див. `LICENSE`.
+
+## English
+
+Companion code for the textbook *Secrets of Gemini AI* (English edition). The package `trembita/` is shared by both editions; its comments, prompts and demo data are in Ukrainian because the running example is a Ukrainian logistics company. English versions of all book examples are in `examples_en/`. Quick start: `pip install -e ".[agents,test]"`, `pytest`, `python scripts/check_examples.py`.

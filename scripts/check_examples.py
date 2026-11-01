@@ -71,7 +71,7 @@ def check_block(code):
 
 def main():
     files = sys.argv[1:] or sorted(glob.glob(os.path.join(ROOT, "manuscript", "*.md"))) \
-        or sorted(glob.glob(os.path.join(ROOT, "examples", "**", "*.py"), recursive=True))
+        or sorted(glob.glob(os.path.join(ROOT, "examples*", "**", "*.py"), recursive=True))
     total = bad = 0
     for p in files:
         s = open(p, encoding="utf-8").read()
